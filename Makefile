@@ -13,8 +13,8 @@ ifeq ($(ARGS), --network sepolia)
 endif
 
 help:
-	@echo "Lott v1.0.0"
-	@echo "makefile v1.0.1"
+	@echo "Lott v1.0.1"
+	@echo "makefile v1.1.0"
 	@echo ""
 	@echo "usage :"
 	@echo " make deploy [ARGS]\n 		example: make deploy ARGS=\"--network sepolia\""
@@ -32,8 +32,8 @@ cat :
 
 # All shorcuts
 gibh :
-	@echo "Lott v1.0.0"
-	@echo "makefile v1.0.1"
+	@echo "Lott v1.0.1"
+	@echo "makefile v1.1.0"
 	@echo ""
 	@make -pRrq : 2>/dev/null | awk -v RS= -F: '/^# File/,/^# Finished Make data base/ {if ($$1 !~ "^[#.]") {print $$1}}' | sort | column
 
@@ -64,6 +64,17 @@ test-all :
 
 test :
 	@if [ -z "$(t)" ]; then echo "\n Error: No test specified. \n 	Usage:\n 	make test t=<test_name> \n 	make test-all\n"; else forge test --match-test "$(t)"; fi
+
+cover:
+	@forge coverage & echo $$! > .pidfile & 
+	@./loading.sh `cat .pidfile`
+	@rm .pidfile
+
+cover-report :
+	@forge coverage --report debug > coverage.txt & echo $$! > .pidfile &
+	@./loading.sh `cat .pidfile`
+	@rm .pidfile
+	@echo "\nCoverage report has been generated.\nPlease check the root directory for the report. \n"
 
 format :
 	forge fmt

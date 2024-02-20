@@ -140,7 +140,7 @@ forge coverage --report debug > coverage.txt
     here we deploy the contract to a sepolia testnet by running the following command:
 
     ```
-    forge script script/DeployFundMe.s.sol --rpc-url $SEPOLIA_RPC_URL --private-key $PRIVATE_KEY --broadcast --verify --etherscan-api-key $ETHERSCAN_API_KEY
+    forge script script/Deploy.s.sol --rpc-url $SEPOLIA_RPC_URL --private-key $PRIVATE_KEY --broadcast --verify --etherscan-api-key $ETHERSCAN_API_KEY
     ```
 
 ## Scripts
